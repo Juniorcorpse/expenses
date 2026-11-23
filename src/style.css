@@ -39,6 +39,44 @@ button, input, select { font: inherit; }
   border-right: 1px solid var(--border);
 }
 
+.github-profile {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr);
+  align-items: center;
+  column-gap: 12px;
+  margin-bottom: 24px;
+}
+.github-avatar {
+  width: 48px;
+  height: 48px;
+  border: 2px solid #f0bec8;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.github-profile-details {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+.github-profile-details strong {
+  overflow: hidden;
+  font-size: 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.github-profile-details a {
+  color: var(--muted);
+  font-size: 12px;
+  text-decoration: none;
+}
+.github-profile-details a:hover { color: var(--primary); }
+.github-status {
+  grid-column: 1 / -1;
+  margin: 7px 0 0;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.4;
+}
 .summary-heading,
 .form-heading,
 .list-heading,

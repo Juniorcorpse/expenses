@@ -22,6 +22,30 @@ const titleError = getRequired<HTMLSpanElement>("#title-error")
 const valueError = getRequired<HTMLSpanElement>("#value-error")
 const categoryError = getRequired<HTMLSpanElement>("#category-error")
 const renderElements = getExpenseRenderElements()
+const githubAvatar = getRequired<HTMLImageElement>("#github-avatar")
+const githubName = getRequired<HTMLElement>("#github-name")
+const githubProfileStatus = getRequired<HTMLParagraphElement>("#github-profile-status")
+
+githubAvatar.addEventListener("error", () => {
+  githubAvatar.hidden = true
+  githubProfileStatus.textContent = "Não foi possível carregar a foto de perfil."
+})
+
+type GithubProfile = {
+  login: string
+  name: string | null
+  avatar_url: string
+}
+
+const isGithubProfile = (value: unknown): value is GithubProfile =>
+  typeof value === "object" &&
+  value !== null &&
+  "login" in value &&
+  typeof value.login === "string" &&
+  "name" in value &&
+  (typeof value.name === "string" || value.name === null) &&
+  "avatar_url" in value &&
+  typeof value.avatar_url === "string"
 
 const expenses: Expense[] = []
 
@@ -70,6 +94,27 @@ form.addEventListener("submit", (event) => {
   titleInput.focus()
 })
 
+const loadGithubProfile = async (): Promise<void> => {
+  try {
+    const response = await fetch("https://api.github.com/users/Juniorcorpse", {
+      headers: { Accept: "application/vnd.github+json" },
+    })
+    if (!response.ok) throw new Error(`GitHub respondeu com status ${response.status}`)
+
+    const data: unknown = await response.json()
+    if (!isGithubProfile(data)) throw new Error("Resposta de perfil inválida")
+
+    githubName.textContent = data.name || data.login
+    githubAvatar.src = data.avatar_url
+    githubAvatar.hidden = false
+    githubProfileStatus.textContent = ""
+  } catch (error) {
+    console.error("Não foi possível carregar o perfil do GitHub.", error)
+    githubName.textContent = "Juniorcorpse"
+    githubProfileStatus.textContent = "Não foi possível carregar o perfil do GitHub."
+  }
+}
+
 titleInput.addEventListener("input", () => {
   titleError.textContent = ""
   titleInput.removeAttribute("aria-invalid")
@@ -84,3 +129,4 @@ categoryInput.addEventListener("change", () => {
 })
 
 refresh()
+void loadGithubProfile()
