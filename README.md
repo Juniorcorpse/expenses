@@ -182,4 +182,4 @@ O select do HTML pode ja conter as opcoes fixas. O TypeScript pode validar o val
 
 ## Aplicação online
 
-[🚀 **Acesse o Buscador de repositórios**](https://juniorcorpse.github.io/expenses/)
+[🚀 **Acesse a Painel de despesas**](https://juniorcorpse.github.io/expenses/)
