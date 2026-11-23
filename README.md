@@ -1,6 +1,7 @@
 # Projeto: Painel de despesas
 
-O projeto vai usar Vite com Vanilla-Typescript
+Painel web simples para registrar despesas pessoais em uma sessao do navegador.
+O projeto usa Vite com Vanilla-Typescript.
 
 ## 2. Stack
 
