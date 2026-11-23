@@ -25,12 +25,16 @@ body {
 
 button, input, select { font: inherit; }
 
-#app { min-height: 100vh; }
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
 
 .expense-app {
   display: grid;
+  flex: 1;
   grid-template-columns: 300px minmax(0, 1fr);
-  min-height: 100vh;
 }
 
 .summary {
@@ -332,6 +336,40 @@ h3 { margin: 0; }
 }
 .empty-state[hidden] { display: none; }
 
+.app-footer {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.8fr) minmax(0, 0.9fr);
+  align-items: center;
+  gap: 20px;
+  padding: 18px 32px;
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+}
+.footer-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  min-width: 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+.footer-item p { margin: 0; }
+.footer-icon {
+  flex: 0 0 18px;
+  width: 18px;
+  height: 18px;
+  margin-top: 1px;
+  color: var(--primary);
+}
+.footer-item a {
+  color: var(--text);
+  font-weight: 700;
+  text-decoration: none;
+}
+.footer-item a:hover { color: var(--primary); }
+.footer-item strong { color: var(--text); }
+
 @media (max-width: 900px) {
   .expense-app { grid-template-columns: 1fr; }
   .summary {
@@ -358,6 +396,11 @@ h3 { margin: 0; }
 }
 
 @media (max-width: 600px) {
+  .app-footer {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 18px 16px;
+  }
   .summary { padding: 20px 16px; }
   .category-summary ul { grid-template-columns: 1fr 1fr; }
   .category-summary li:nth-child(2n) { border-right: 0; }

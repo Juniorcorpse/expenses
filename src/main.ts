@@ -25,6 +25,8 @@ const renderElements = getExpenseRenderElements()
 const githubAvatar = getRequired<HTMLImageElement>("#github-avatar")
 const githubName = getRequired<HTMLElement>("#github-name")
 const githubProfileStatus = getRequired<HTMLParagraphElement>("#github-profile-status")
+const githubDeveloperName = getRequired<HTMLElement>("#github-developer-name")
+const githubProjectDescription = getRequired<HTMLParagraphElement>("#github-project-description")
 
 githubAvatar.addEventListener("error", () => {
   githubAvatar.hidden = true
@@ -37,6 +39,10 @@ type GithubProfile = {
   avatar_url: string
 }
 
+type GithubRepository = {
+  description: string | null
+}
+
 const isGithubProfile = (value: unknown): value is GithubProfile =>
   typeof value === "object" &&
   value !== null &&
@@ -46,6 +52,12 @@ const isGithubProfile = (value: unknown): value is GithubProfile =>
   (typeof value.name === "string" || value.name === null) &&
   "avatar_url" in value &&
   typeof value.avatar_url === "string"
+
+const isGithubRepository = (value: unknown): value is GithubRepository =>
+  typeof value === "object" &&
+  value !== null &&
+  "description" in value &&
+  (typeof value.description === "string" || value.description === null)
 
 const expenses: Expense[] = []
 
@@ -104,14 +116,36 @@ const loadGithubProfile = async (): Promise<void> => {
     const data: unknown = await response.json()
     if (!isGithubProfile(data)) throw new Error("Resposta de perfil inválida")
 
-    githubName.textContent = data.name || data.login
+    const displayName = data.name?.trim() || data.login
+    githubName.textContent = displayName
+    githubDeveloperName.textContent = displayName
     githubAvatar.src = data.avatar_url
     githubAvatar.hidden = false
     githubProfileStatus.textContent = ""
   } catch (error) {
     console.error("Não foi possível carregar o perfil do GitHub.", error)
     githubName.textContent = "Juniorcorpse"
+    githubDeveloperName.textContent = "Não disponível"
     githubProfileStatus.textContent = "Não foi possível carregar o perfil do GitHub."
+  }
+}
+
+const loadGithubRepositoryDescription = async (): Promise<void> => {
+  try {
+    const response = await fetch("https://api.github.com/repos/Juniorcorpse/expenses", {
+      headers: { Accept: "application/vnd.github+json" },
+    })
+    if (!response.ok) throw new Error(`GitHub respondeu com status ${response.status}`)
+
+    const data: unknown = await response.json()
+    if (!isGithubRepository(data)) throw new Error("Resposta do repositório inválida")
+
+    githubProjectDescription.textContent =
+      data.description || "Nenhuma descrição informada no GitHub."
+  } catch (error) {
+    console.error("Não foi possível carregar a descrição do projeto.", error)
+    githubProjectDescription.textContent =
+      "Não foi possível carregar a descrição do projeto."
   }
 }
 
@@ -130,3 +164,4 @@ categoryInput.addEventListener("change", () => {
 
 refresh()
 void loadGithubProfile()
+void loadGithubRepositoryDescription()
