@@ -100,8 +100,8 @@ Esse modelo comum nao precisa ser criado antes de existir uma necessidade real d
 
 ### Fluxo recomendado
 
-1. Definir no PRD os requisitos da receita.
-2. Registrar no ADR se houver uma decisao arquitetural nova.
+1. Definir os requisitos da receita.
+2. Registrar decisoes arquiteturais quando necessario.
 3. Adicionar os tipos em `src/types.ts`.
 4. Criar o modulo `src/incomes/`.
 5. Implementar validacao e calculo em funcoes puras.
@@ -109,7 +109,7 @@ Esse modelo comum nao precisa ser criado antes de existir uma necessidade real d
 7. Registrar os eventos em `main.ts` ou em um modulo chamado por `main.ts`.
 8. Renderizar receitas sem reconstruir manualmente toda a pagina.
 9. Integrar os totais ao resumo geral sem acoplar receitas a despesas.
-10. Executar os testes manualmente descritos no TRD e o build.
+10. Executar os testes manuais planejados e o build.
 
 ### Integracao com despesas
 
@@ -119,7 +119,7 @@ As integracoes existentes podem seguir estes niveis:
 - **Nivel 2:** um resumo geral calcula saldo como `total de receitas - total de despesas`.
 - **Nivel 3:** um modulo de transacoes combina despesas e receitas em uma unica visao.
 
-A implementacao nao deve pular diretamente para o Nivel 3 sem uma necessidade funcional definida no PRD.
+A implementacao nao deve pular diretamente para o Nivel 3 sem uma necessidade funcional definida.
 
 Exemplo simples de resultado geral:
 
@@ -140,7 +140,7 @@ Esse calculo deve ficar em uma funcao dedicada, nao dentro de uma funcao de rend
 - Usar `type` em vez de `interface`.
 - Preservar HTML semantico em `index.html`.
 - Registrar todos os eventos em TypeScript.
-- Atualizar PRD, TRD e ADR quando uma nova funcionalidade alterar escopo ou arquitetura.
+- Atualizar a documentacao quando uma nova funcionalidade alterar escopo ou arquitetura.
 - Executar `npm run build` apos qualquer integracao.
 
 ### Adicao de outras funcionalidades
@@ -152,7 +152,7 @@ Para funcionalidades como exportacao, filtros, edicao ou persistencia:
 3. Separar validacao, estado e apresentacao.
 4. Verificar se os requisitos exigem mudanca no modelo de dados.
 5. Atualizar o HTML sem introduzir handlers inline.
-6. Documentar decisoes relevantes em um novo ADR.
+6. Documentar decisoes relevantes.
 
 
 ## 7. Constantes
