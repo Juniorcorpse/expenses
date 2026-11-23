@@ -179,5 +179,6 @@ O select do HTML pode ja conter as opcoes fixas. O TypeScript pode validar o val
 
 ## Publicar no GitHub Pages
 
-[🚀 **Acesse o Painel de despesas** , o site estara disponivel em]
-(`https://juniorcorpse.github.io/expenses/`).
+## Aplicação online
+
+[🚀 **Acesse o Buscador de repositórios**](https://juniorcorpse.github.io/expenses/)
