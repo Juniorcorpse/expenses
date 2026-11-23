@@ -178,7 +178,7 @@ Usar a constante para:
 
 O select do HTML pode ja conter as opcoes fixas. O TypeScript pode validar o valor selecionado para evitar inconsistencias.
 
-## Publicar no GitHub Pages
+# Publicado no GitHub Pages
 
 ## Aplicação online
 
