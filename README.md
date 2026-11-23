@@ -176,3 +176,8 @@ Usar a constante para:
 - Percorrer os totais no render.
 
 O select do HTML pode ja conter as opcoes fixas. O TypeScript pode validar o valor selecionado para evitar inconsistencias.
+
+## Publicar no GitHub Pages
+
+**Painel de despesas** , o site estara disponivel em
+`https://juniorcorpse.github.io/expenses/`.
