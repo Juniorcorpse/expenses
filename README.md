@@ -177,7 +177,9 @@ Usar a constante para:
 
 O select do HTML pode ja conter as opcoes fixas. O TypeScript pode validar o valor selecionado para evitar inconsistencias.
 
-## Publicar no GitHub Pages
+# Publicar no GitHub Pages
 
-**Painel de despesas** , o site estara disponivel em
-`https://juniorcorpse.github.io/expenses/`.
+
+## Aplicação online
+
+[🚀 **Acesse o Painel de despesas**](https://juniorcorpse.github.io/expenses/)
