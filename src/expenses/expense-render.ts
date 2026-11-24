@@ -13,8 +13,23 @@ const categoryLabels: Record<ExpenseCategory, string> = {
   saude: "Saúde",
   outros: "Outros",
 }
-//--
-//--
+/*
+  *****************************************************************
+  *Realiza a ligação entre o HTML da página e o código TypeScript.*
+  *****************************************************************
+  A função getExpenseRenderElements é responsável por:
+
+  Centralizar os elementos usados pela interface.
+  Impedir operações em elementos que não foram encontrados.
+  Entregar esses elementos no formato definido por ExpenseRenderElements.
+  Falhar imediatamente com uma mensagem clara se o HTML estiver incompleto.
+  Exemplo de uso:
+  const elements = getExpenseRenderElements()
+
+  elements.count.textContent = "3"
+  elements.total.textContent = "R$ 250,00"
+  elements.categoryTotals.alimento.textContent = "R$ 100,00"
+*/
 export const getExpenseRenderElements = (): ExpenseRenderElements => {
   const getRequired = <ElementType extends Element>(selector: string) => {
     const element = document.querySelector<ElementType>(selector)
